@@ -1,0 +1,23 @@
+version: '3'
+services:
+  redis:
+    image: "redis:alpine"
+    ports:
+      - "6379:6379"
+    networks:
+      - backend
+
+  web:
+    build: ./vote
+    ports:
+      - "80:80"
+    depends_on:
+      - redis
+    networks:
+      - backend
+    environment:
+      - OPTION_A=Cats
+      - OPTION_B=Dogs
+
+networks:
+  backend:
