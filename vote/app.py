@@ -19,7 +19,6 @@ app.logger.setLevel(logging.INFO)
 
 def get_redis():
     if not hasattr(g, 'redis'):
-        # Retry mechanism in case Redis is not available
         for _ in range(5):
             try:
                 g.redis = Redis(host="redis", db=0, socket_timeout=5)
@@ -56,4 +55,4 @@ def hello():
 
 
 if __name__ == "__main__":
-    app.run(host='0.0.0.0', port=80, debug=True, threaded=True)
+    app.run(host='0.0.0.0', port=5000, debug=True, threaded=True)
